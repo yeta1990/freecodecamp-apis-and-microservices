@@ -30,3 +30,17 @@ app.get("/api/hello", function (req, res) {
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+/*
+
+I can get the IP address, preferred languages (from header Accept-Language) and system infos (from header User-Agent) for my device.
+
+
+{"ipaddress":"159.20.14.100","language":"en-US,en;q=0.5","software":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0"}
+
+
+*/
+
+app.get("/api/whoami", function(req,res) {
+  res.json({ipaddress: req.ip, language: req.get('Accept-Language'), software: req.get('User-Agent')})
+});
